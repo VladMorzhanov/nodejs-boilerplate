@@ -5,6 +5,7 @@
   "main": "./src/bin/www.js",
   "scripts": {
     "start": "DEBUG=mongodb:server,main-server:server,server:info,server:mq node ./src/bin/www.js",
+    "http": "DEBUG=mongodb:server,main-server:server,server:info,server:mq node ./src/bin/www-http.js",
     "watch": "`npm bin`/nodemon -L",
     "test": "mocha --recursive",
     "lint": "`npm bin`/eslint .",
