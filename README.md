@@ -20,7 +20,7 @@ This boilerplate contains such folders:
 * <b>/src/bin </b> - contain main scripts that configures and run servers.
 * <b>/src/constants </b> - app constants.
 * <b>/src/controllers </b> - contain controllers that receives requests from routes, executes business logic via services and returns responses to client. 
-* <b>/src/db </b> - contain scripts to setup and manage data base
+* <b>/src/db </b> - contain scripts to setup and manage database
 * <b>/src/error </b> - custom errors
 * <b>/src/middleware </b> - app middlewares
 * <b>/src/models </b> - database models (schemas)
