@@ -27,7 +27,7 @@ This boilerplate contains such folders:
 * <b>/src/routes </b> - configure here youre app's routes
 * <b>/src/services </b> - services contains logic to manage database, execute requests to other servers, change application behabior, and etc.
 
-<b>/test </b> - contains tests for controllers, services and other parts of application.
+* <b>/test </b> - contains tests for controllers, services and other parts of application.
 
 # NPM Scripts
 
