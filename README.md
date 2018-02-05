@@ -41,6 +41,7 @@ This boilerplate contains such folders:
 
 * Node.js
 * Express.js
+* MongoDB
 * Mocha
 * Supertest
 * Should.js
