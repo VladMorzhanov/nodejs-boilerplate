@@ -41,19 +41,16 @@ This boilerplate contains such folders:
 
 # Main Technologies and libraries
 
-* Node.js
-* Express.js
-* MongoDB
-* Mocha
-* Supertest
-* Should.js
-* Helmet
-* Request
-* Formidable
-* lodash
-* mongoose
-* morgan
-* debug
+- <a href="https://nodejs.org/en/">NodeJS</a>
+- <a href="https://expressjs.com/">ExpressJS</a>
+- <a href="https://jwt.io/">JWT</a>
+- <a href="https://github.com/helmetjs/helmet">Helmet</a>
+- <a href="https://github.com/request/request">Request</a>
+- <a href="https://github.com/felixge/node-formidable">Formidable</a>
+- <a href="https://mongoosejs.com/">Mongoose</a>
+- <a href="https://github.com/expressjs/morgan">Morgan</a>
+- <a href="https://mochajs.org/">Mocha</a>
+- <a href="https://github.com/visionmedia/supertest">Supertest</a>
 
 ## Contributing
 
