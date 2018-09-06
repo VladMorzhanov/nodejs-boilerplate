@@ -1,4 +1,6 @@
-# Node.js Boilerplate
+# Node.js Boilerplate with ExpressJS and Mongodb
+
+<img src="https://i.imgur.com/KbO2Soz.jpg"/>
 
 Node.js Boilerplate is an project that allows you to start new node.js project from scratch.
 
