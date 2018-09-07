@@ -31,7 +31,7 @@ This boilerplate contains such folders:
 
 * <b>/test </b> - contains tests for controllers, services and other parts of application.
 
-# NPM Scripts
+## NPM Scripts
 
 * start - run node.js server (HTTPS)
 * http - run node.js server (HTTP)
@@ -39,7 +39,7 @@ This boilerplate contains such folders:
 * lint - run eslint check
 * forever - add /src/bin/www.js script to forever scripts and run
 
-# Main Technologies and libraries
+## Main Technologies and libraries
 
 - <a href="https://nodejs.org/en/">NodeJS</a>
 - <a href="https://expressjs.com/">ExpressJS</a>
