@@ -1,7 +1,7 @@
 const http = require("http");
 const async = require("async");
 const signals = ["SIGINT", "SIGTERM"];
-const { printIP } = require("../services/app-service");
+const { printIp } = require("../services/app-service");
 const { PORT, NODE_ENV } = require("../constants");
 const db = app.get("db");
 const cors = require("cors");
@@ -56,7 +56,7 @@ const onListening = () => {
     debug(`This is testing instance.`);
     debug(`To run production provide NODE_ENV = production.`);
   }
-  printIP();
+  printIp();
 };
 
 const onError = err => {
