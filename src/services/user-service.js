@@ -1,7 +1,7 @@
-const User = require('../models/User')
-const {SALT, EC} = require('../constants')
-const jwt = require('jsonwebtoken')
-const CustomError = require('../error/custom-error')
+const User = require("../models/User");
+const { SECRET, ERROR_CODES } = require("../constants");
+const jwt = require("jsonwebtoken");
+const CustomError = require("../error/custom-error");
 
 /**
  * getUser user data by id
@@ -9,13 +9,13 @@ const CustomError = require('../error/custom-error')
  * @throws {Error} error
  * @returns {Promise.<*>} user data
  */
-async function getUser (id) {
-  const user = await User.findById(id)
+async function getUser(id) {
+  const user = await User.findById(id);
 
   // hide user password
-  user.password = undefined
+  user.password = undefined;
 
-  return user
+  return user;
 }
 
 /**
@@ -25,19 +25,19 @@ async function getUser (id) {
  * @throws {Error} error
  * @returns {Promise.<void>}
  */
-async function editUser (id, data) {
-  let user = await User.findById(id)
+async function editUser(id, data) {
+  let user = await User.findById(id);
 
-  data.email = undefined
-  data.password = undefined
-  data.token = undefined
-  data.name = data.name.trim()
+  data.email = undefined;
+  data.password = undefined;
+  data.token = undefined;
+  data.name = data.name.trim();
 
   // update the users info only if it's new
   for (let k in data) {
     if (data.hasOwnProperty(k)) {
       if (data[k]) {
-        user[k] = data[k]
+        user[k] = data[k];
       }
     }
   }
@@ -47,18 +47,21 @@ async function editUser (id, data) {
     {
       id: user.id,
       email: user.email
-    }, SALT, {
-      expiresIn: '30d'       // expires in 30 days
-    })
+    },
+    SECRET,
+    {
+      expiresIn: "30d" // expires in 30 days
+    }
+  );
 
   // save user
-  user = await user.save()
+  user = await user.save();
 
   if (!user) {
-    throw new CustomError('User not saved.', EC.DATA_NOT_SAVED)
+    throw new CustomError("User not saved.", ERROR_CODES.DATA_NOT_SAVED);
   }
 
-  return user
+  return user;
 }
 
 /**
@@ -67,19 +70,19 @@ async function editUser (id, data) {
  * @throws {Error} error
  * @returns is user deleted
  */
-async function deleteUser (id) {
+async function deleteUser(id) {
   if (!id) {
-    throw new CustomError('Data not provided.', EC.DATA_NOT_PROVIDED)
+    throw new CustomError("Data not provided.", ERROR_CODES.DATA_NOT_PROVIDED);
   }
 
-  const user = await User.findById(id)
+  const user = await User.findById(id);
 
   if (!user) {
-    throw new CustomError('User not found.', EC.DATA_NOT_SAVED)
+    throw new CustomError("User not found.", ERROR_CODES.DATA_NOT_SAVED);
   }
 
   // delete user
-  await user.remove()
+  await user.remove();
 }
 
 /**
@@ -88,26 +91,29 @@ async function deleteUser (id) {
  * @throws {Error} error
  * @returns {Promise.<*>} user data
  */
-async function createNewToken (user) {
+async function createNewToken(user) {
   user.token = jwt.sign(
     {
       id: user.id,
       email: user.email
-    }, SALT, {
-      expiresIn: '30d'
-    })
+    },
+    SECRET,
+    {
+      expiresIn: "30d"
+    }
+  );
 
-  user = await user.save()
+  user = await user.save();
 
   if (!user) {
-    throw new CustomError('User not saved.', EC.DATA_NOT_SAVED)
+    throw new CustomError("User not saved.", ERROR_CODES.DATA_NOT_SAVED);
   }
 
-  return user
+  return user;
 }
 
 module.exports = {
   getUser,
   editUser,
   deleteUser
-}
+};

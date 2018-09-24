@@ -1,22 +1,19 @@
-const NODE_ENV = process.env.NODE_ENV || 'development'
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
   NODE_ENV,
-  REDIS_URL: process.env.REDIS_URL || 'def',
-  PORT: 3300,
-  API_URI: '/api',
-  MONGO_URL: `${process.env.MONGO_URL}/server_${NODE_ENV}`,
-  LANGUAGES: ['en'],
-  SES: process.env.SES || 'def',
-  SALT: '###salt###',
-  SC: {
+  PORT: 4000,
+  API_URI: "/api",
+  MONGODB_CONNECTION_STRING: process.env.MONGODB_CONNECTION_STRING,
+  SECRET: process.env.SECRET,
+  STATUS_CODES: {
     SUCCESS: 200,
     BAD_REQUEST: 400,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
     SERVER_ERROR: 500
   },
-  EC: {
+  ERROR_CODES: {
     SERVER_ERROR: 0,
     NOT_OUR_APP: 1,
     DATA_NOT_PROVIDED: 2,
@@ -29,9 +26,9 @@ module.exports = {
     DATA_NOT_SAVED: 9
   },
   MIME_TYPES: {
-    PNG: 'image/png',
-    JPEG: 'image/jpeg',
-    GIF: 'image/gif',
-    BMP: 'image/bmp'
+    PNG: "image/png",
+    JPEG: "image/jpeg",
+    GIF: "image/gif",
+    BMP: "image/bmp"
   }
-}
+};

@@ -1,94 +1,84 @@
-const request = require('request')
-const CustomError = require('../error/custom-error')
-const {SC} = require('../constants')
-const formidable = require('formidable')
-const debug = require('debug')('main-server:server')
-const os = require('os')
+const CustomError = require("../error/custom-error");
+const { STATUS_CODES } = require("../constants");
+const formidable = require("formidable");
+const debug = require("debug")("main-server:server");
+const os = require("os");
+const request = Promise.promisify(require("request"));
+Promise.promisifyAll(request);
 
-/**
- * Send request via request module
- * @param params - params for request
- * @returns {Promise}
- */
-function sendRequest (params) {
-  return new Promise(function (resolve, reject) {
-    request(params, function (error, res, body) {
-      if (!error && res.statusCode === SC.SUCCESS) {
+const sendRequest = params => {
+  // TODO: change to async\await
+  new Promise((resolve, reject) => {
+    request(params, (error, res, body) => {
+      if (!error && res.statusCode === STATUS_CODES.SUCCESS) {
         try {
-          return resolve(JSON.parse(body))
+          return resolve(JSON.parse(body));
         } catch (e) {
-          return resolve(body)
+          return resolve(body);
         }
       } else {
         if (res) {
-          debug('in send request status code = ' +
-            res.statusCode + ' message = ' + res.message)
+          debug(
+            "in send request status code = " +
+              res.statusCode +
+              " message = " +
+              res.message
+          );
         }
         if (!error) {
           try {
-            return reject(new CustomError(JSON.parse(body)))
+            return reject(new CustomError(JSON.parse(body)));
           } catch (e) {
-            return reject(new CustomError(body))
+            return reject(new CustomError(body));
           }
         }
-        reject(error)
+        reject(error);
       }
-    })
-  })
-}
+    });
+  });
+};
 
-/**
- * Parse form data via Formidable
- * @param req - request object
- * @returns {Promise}
- */
-function parseForm (req) {
-  return new Promise(function (resolve, reject) {
-    let form = new formidable.IncomingForm()
-    form.parse(req, function (err, fields, files) {
+const parseForm = req => {
+  return new Promise((resolve, reject) => {
+    let form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
       if (err) {
-        reject(err)
+        reject(err);
       }
       if (!fields) {
-        reject(new Error('No fields.'))
+        reject(new Error("No fields."));
       }
       if (!files) {
-        reject(new Error('No files.'))
+        reject(new Error("No files."));
       }
-      resolve([fields, files])
-    })
-  })
-}
+      resolve([fields, files]);
+    });
+  });
+};
 
-/**
- * print server IP
- */
-function printIP () {
-  const ifaces = os.networkInterfaces()
+const printIP = () => {
+  const ifaces = os.networkInterfaces();
 
-  Object.keys(ifaces).forEach(function (ifname) {
-    let alias = 0
+  Object.keys(ifaces).forEach(function(ifname) {
+    let alias = 0;
 
-    ifaces[ifname].forEach(function (iface) {
-      if (iface.family !== 'IPv4' || iface.internal !== false) {
-        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-        return
+    ifaces[ifname].forEach(function(iface) {
+      if (iface.family !== "IPv4" || iface.internal !== false) {
+        return;
       }
 
       if (alias >= 1) {
-        // this single interface has multiple ipv4 addresses
-        debug(ifname + ':' + alias, iface.address)
+        debug(ifname + ":" + alias, iface.address);
       } else {
-        // this interface has only one ipv4 adress
-        debug(ifname, iface.address)
+        debug(ifname, iface.address);
       }
-      ++alias
-    })
-  })
-}
+      ++alias;
+    });
+  });
+};
 
 module.exports = {
   sendRequest,
   parseForm,
   printIP
-}
+};
