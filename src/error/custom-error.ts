@@ -1,4 +1,4 @@
-const { ERROR_CODES, STATUS_CODES } = require("../constants/index");
+const { ERROR_CODES, STATUS_CODES } = require("../constants");
 
 module.exports = function CustomError(message, ec) {
   let status;

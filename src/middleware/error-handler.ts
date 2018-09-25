@@ -1,4 +1,4 @@
-const { ERROR_CODES, STATUS_CODES } = require("../constants/index");
+const { ERROR_CODES, STATUS_CODES } = require("../constants");
 
 const errorHandler = () => {
   return (e, request, response, next) => {

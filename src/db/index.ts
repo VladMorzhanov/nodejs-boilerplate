@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
 const { forOwn } = require("lodash");
-const debug = require("debug")("mongodb:server");
 const { MONGODB_CONNECTION_STRING } = require("../constants");
 const models = require("../models");
 const options = require("./options.json");

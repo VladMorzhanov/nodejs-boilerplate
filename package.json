@@ -6,12 +6,9 @@
   "author": "Vlad Morzhanov",
   "license": "ISC",
   "scripts": {
-    "start": "DEBUG=mongodb:server,main-server:server,server:info,server:mq node ./src/bin/www.js",
-    "watch": "`npm bin`/nodemon -L",
-    "test": "mocha --recursive",
-    "lint": "`npm bin`/eslint .",
-    "pretest": "npm run lint",
-    "forever": "NODE_ENV=production forever start src/bin/api-v2.js"
+    "start": "ts-node src/index.ts",
+    "serve": "node ./dist",
+    "build": "tsc"
   },
   "keywords": [
     "node",
@@ -43,7 +40,9 @@
     "nodemon": "^1.11.0",
     "nyc": "^10.1.2",
     "should": "^11.2.1",
-    "supertest": "^2.0.1"
+    "supertest": "^2.0.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
   },
   "repository": {
     "type": "git",

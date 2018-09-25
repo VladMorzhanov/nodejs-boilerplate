@@ -1,7 +1,5 @@
-const NODE_ENV = process.env.NODE_ENV || "development";
-
 module.exports = {
-  NODE_ENV,
+  NODE_ENV: process.env.NODE_ENV || "development",
   PORT: 4000,
   API_URI: "/api",
   MONGODB_CONNECTION_STRING: process.env.MONGODB_CONNECTION_STRING,
