@@ -1,16 +1,16 @@
-const User = require("../models/User");
-const { SECRET, ERROR_CODES } = require("../constants");
-const jwt = require("jsonwebtoken");
-const CustomError = require("../error/custom-error");
+import User from "../models/User";
+import { SECRET, ERROR_CODES } from "../constants";
+import jwt from "jsonwebtoken";
+import CustomError from "../error/custom-error";
 
-const getUser = async id => {
-  const user = await User.findById(id);
+const getUser = async (id: number) => {
+  const user: any = await User.findById(id);
   user.password = undefined;
   return user;
 };
 
-const editUser = async (id, data) => {
-  let user = await User.findById(id);
+const editUser = async (id: number, data: any) => {
+  let user: any = await User.findById(id);
 
   data.email = undefined;
   data.password = undefined;
@@ -45,7 +45,7 @@ const editUser = async (id, data) => {
   return user;
 };
 
-const deleteUser = async id => {
+const deleteUser = async (id: number) => {
   if (!id) {
     throw new CustomError("Data not provided.", ERROR_CODES.DATA_NOT_PROVIDED);
   }
@@ -59,7 +59,7 @@ const deleteUser = async id => {
   await user.remove();
 };
 
-const createNewToken = async user => {
+const createNewToken = async (user: any) => {
   user.token = jwt.sign(
     {
       id: user.id,

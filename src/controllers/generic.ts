@@ -1,14 +1,15 @@
-const { STATUS_CODES } = require("../constants");
+import { Response, Request } from "express";
+import { STATUS_CODES } from "../constants";
 
-module.exports = {
-  healthCheck: (req, res) =>
+export default {
+  healthCheck: (_: Request, res: Response) =>
     res.status(STATUS_CODES.SUCCESS).json({ success: true, message: "alive" }),
-  genericGET: async ({ headers, query, params }, res, next) =>
+  genericGET: async (_: Request, res: Response) =>
     res.status(STATUS_CODES.SUCCESS).json(),
-  genericPOST: async ({ headers, body, query, params }, res, next) =>
+  genericPOST: async (_: Request, res: Response) =>
     res.status(STATUS_CODES.SUCCESS).json(),
-  genericPUT: async ({ headers, body, query, params }, res, next) =>
+  genericPUT: async (_: Request, res: Response) =>
     res.status(STATUS_CODES.SUCCESS).json(),
-  genericDELETE: async ({ headers, query, params }, res, next) =>
+  genericDELETE: async (_: Request, res: Response) =>
     res.status(STATUS_CODES.SUCCESS).json()
 };

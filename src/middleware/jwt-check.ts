@@ -1,11 +1,12 @@
-const { STATUS_CODES, SECRET } = require("../constants");
-const jwt = require("jsonwebtoken");
+import { Response } from "express";
+import { STATUS_CODES, SECRET } from "../constants";
+import jwt from "jsonwebtoken";
 
-module.exports = (req, res, next) => {
+export default (req: any, res: Response, next: Function) => {
   const token = req.headers["x-token"];
 
   if (token) {
-    jwt.verify(token, SECRET, function(err, decoded) {
+    jwt.verify(token as string, SECRET, (err, decoded) => {
       if (err) {
         return res.status(STATUS_CODES.UNAUTHORIZED).json({
           success: false,

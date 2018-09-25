@@ -1,5 +1,5 @@
 module.exports = {
-  convert: d =>
+  convert: (d: any) =>
     d.constructor === Date
       ? d
       : d.constructor === Array
@@ -12,13 +12,13 @@ module.exports = {
               ? new Date(d.year, d.month, d.date)
               : NaN,
 
-  compare: (a, b) =>
+  compare: (a: number, b: number) =>
     isFinite((a = this.convert(a).valueOf())) &&
     isFinite((b = this.convert(b).valueOf()))
       ? (a > b) - (a < b)
       : NaN,
 
-  inRange: (d, start, end) =>
+  inRange: (d: Date, start: Date, end: Date) =>
     isFinite((d = this.convert(d).valueOf())) &&
     isFinite((start = this.convert(start).valueOf())) &&
     isFinite((end = this.convert(end).valueOf()))

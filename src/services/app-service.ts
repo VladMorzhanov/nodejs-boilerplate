@@ -1,25 +1,25 @@
-const CustomError = require("../error/custom-error");
-const { STATUS_CODES } = require("../constants");
-const debug = require("debug")("main-server:server");
-const os = require("os");
-const request = Promise.promisify(require("request"));
-Promise.promisifyAll(request);
+import CustomError from "../error/custom-error";
+import { STATUS_CODES } from "../constants";
+import os from "os";
+import Bluebird from "bluebird";
+import request from "request";
+Bluebird.promisifyAll(request);
 
-const sendRequest = async params => {
-  const { res, body } = await request(params);
+export const sendRequest = async (params: any) => {
+  const { response, body } = await request(params);
 
-  if (res.statusCode === STATUS_CODES.SUCCESS) {
+  if (response.statusCode === STATUS_CODES.SUCCESS) {
     try {
-      return JSON.parse(body);
+      return JSON.parse(body as string);
     } catch (e) {
       return body;
     }
   } else {
-    return new CustomError(body);
+    return new CustomError("Error when executing request", null);
   }
 };
 
-const printIp = () => {
+export const printIp = () => {
   const ifaces = os.networkInterfaces();
 
   Object.keys(ifaces).forEach(ifname => {
@@ -29,17 +29,11 @@ const printIp = () => {
         return;
       }
       if (alias >= 1) {
-        debug(ifname + ":" + alias, iface.address);
+        console.log(ifname + ":" + alias, iface.address);
       } else {
-        debug(ifname, iface.address);
+        console.log(ifname, iface.address);
       }
       ++alias;
     });
   });
-};
-
-module.exports = {
-  sendRequest,
-  parseForm,
-  printIp
 };

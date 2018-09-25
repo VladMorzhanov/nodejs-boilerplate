@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import bnCrypt from "bcrypt-nodejs";
 const Schema = mongoose.Schema;
-const bnCrypt = require("bcrypt-nodejs");
 
 const User = new Schema({
   name: { type: String, default: "NaN" },
@@ -9,19 +9,18 @@ const User = new Schema({
   dateCreated: { type: String, default: Date.now() }
 });
 
-User.pre("save", function(next) {
+User.pre("save", (next: Function) => {
   const user = this;
 
   if (!user.isModified("password")) return next();
-
   if (user.name) {
     user.name = user.name.trim();
   }
 
   if (user.password !== "NaN") {
-    bnCrypt.hash(user.password, null, null, function(err, hash) {
+    bnCrypt.hash(user.password, null, null, (err: Error, hash: string) => {
       if (err) {
-        throw new Error(err);
+        throw new Error(err.message);
       }
 
       user.password = hash;
@@ -32,9 +31,8 @@ User.pre("save", function(next) {
   }
 });
 
-User.methods.comparePassword = function(password) {
+User.methods.comparePassword = (password: string) => {
   const user = this;
-
   if (user.password === "NaN") {
     return false;
   }
@@ -42,4 +40,4 @@ User.methods.comparePassword = function(password) {
   return bnCrypt.compareSync(password, user.password);
 };
 
-module.exports = mongoose.model("User", User);
+export default mongoose.model("User", User);

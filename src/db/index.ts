@@ -1,9 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import { MONGODB_CONNECTION_STRING, NODE_ENV } from "../constants";
+import options from "./options";
 mongoose.Promise = require("bluebird");
-const { forOwn } = require("lodash");
-const { MONGODB_CONNECTION_STRING } = require("../constants");
-const models = require("../models");
-const options = require("./options.json");
 
 mongoose.connect(
   MONGODB_CONNECTION_STRING,
@@ -13,26 +11,24 @@ mongoose.connect(
 const db = mongoose.connection;
 
 db.on("error", err => {
-  debug(`MongoDB: ${err.message}`);
+  console.log(`MongoDB: ${err.message}`);
   process.kill(process.pid, "SIGINT");
 });
 
 db.on("reconnected", () => {
-  debug(`MongoDB: reconnected!`);
+  console.log(`MongoDB: reconnected!`);
 });
 
 db.once("open", () => {
   if (NODE_ENV !== "development") {
-    debug(`MongoDB: connected on ${MONGO_URL}!`);
+    console.log(`MongoDB: connected on ${MONGODB_CONNECTION_STRING}!`);
   }
 });
 
 db.on("disconnected", () => {
   if (NODE_ENV !== "development") {
-    debug("MongoDB: disconnected!");
+    console.log("MongoDB: disconnected!");
   }
 });
 
-forOwn(models, initModel => initModel(db));
-
-module.exports = db;
+export default db;

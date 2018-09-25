@@ -1,17 +1,16 @@
-const http = require("http");
-const async = require("async");
-const signals = ["SIGINT", "SIGTERM"];
-const { printIp } = require("../services/app-service");
-const { PORT, NODE_ENV } = require("../constants");
-const db = app.get("db");
-const cors = require("cors");
-const { json, urlencoded } = require("body-parser");
-const express = require("express");
-const { API_URI } = require("./constants");
-const db = require("./db");
-const { api } = require("./routers");
-const helmet = require("helmet");
+import http from "http";
+import async from "async";
+import { printIp } from "./services/app-service";
+import { PORT, NODE_ENV } from "./constants";
+import cors from "cors";
+import { json, urlencoded } from "body-parser";
+import express from "express";
+import { API_URI } from "./constants";
+import db from "./db";
+import api from "./routers/api";
+import helmet from "helmet";
 
+const signals = ["SIGINT", "SIGTERM"];
 const app = express();
 
 app.set("db", db);
@@ -24,54 +23,54 @@ app.use(API_URI, api);
 const server = http.createServer(app);
 server.listen(PORT);
 
-server.on("error", onError);
-server.on("listening", onListening);
-
-signals.forEach(function(signal) {
-  process.once(signal, () => {
-    debug(signal, " happened!");
-    async.waterfall([closeServer, closeDbConnection], closeApp);
-  });
-});
-
-const closeApp = err => {
-  debug("Now application will be closed!", err || "");
+const closeApp = (err: any) => {
+  console.log("Now application will be closed!", err || "");
   err ? process.exit(1) : process.exit(0);
 };
 
-const closeServer = next => {
-  debug("Now server will be closed!");
+const closeServer = (next: Function) => {
+  console.log("Now server will be closed!");
   server.close(next);
 };
 
-const closeDbConnection = next => {
-  debug("Now db will be closed!");
+const closeDbConnection = (next: any) => {
+  console.log("Now db will be closed!");
   db.close(next);
 };
 
 const onListening = () => {
-  const addr = server.address();
-  debug(`Listening on port ${addr.port}`);
+  const addr: any = server.address();
+  console.log(`Listening on port ${addr.port}`);
   if (NODE_ENV === "development") {
-    debug(`This is testing instance.`);
-    debug(`To run production provide NODE_ENV = production.`);
+    console.log(`This is testing instance.`);
+    console.log(`To run production provide NODE_ENV = production.`);
   }
   printIp();
 };
 
-const onError = err => {
+const onError = (err: any) => {
   if (err.syscall !== "listen") {
     throw err;
   }
 
   switch (err.code) {
     case "EACCES":
-      debug(`Port ${PORT} requires elevated privileges`);
+      console.log(`Port ${PORT} requires elevated privileges`);
       return process.exit(1);
     case "EADDRINUSE":
-      debug(`Port ${PORT} is already in use`);
+      console.log(`Port ${PORT} is already in use`);
       return process.exit(1);
     default:
       throw err;
   }
 };
+
+server.on("error", onError);
+server.on("listening", onListening);
+
+signals.forEach((signal: any) => {
+  process.once(signal, () => {
+    console.log(signal, " happened!");
+    async.waterfall([closeServer, closeDbConnection], closeApp);
+  });
+});

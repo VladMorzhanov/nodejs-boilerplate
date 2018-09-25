@@ -1,5 +1,5 @@
-const notFound = message => {
-  return (_, response) => response.status(404).json(message);
-};
+import { Request, Response } from "express";
 
-module.exports = notFound;
+export default (message: string) => {
+  return (_: Request, res: Response) => res.status(404).json(message);
+};

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const Generic = require("../controllers/generic");
-const User = require("../controllers/user");
+import User from "../controllers/user";
 const JwtCheck = require("../middleware/jwt-check");
 const ErrorHandler = require("../middleware/error-handler");
 const NotFound = require("../middleware/not-found");
@@ -19,4 +19,4 @@ router
   .use(ErrorHandler())
   .use(NotFound("Not Found"));
 
-module.exports = router;
+export default router;
