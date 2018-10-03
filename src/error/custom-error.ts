@@ -37,5 +37,3 @@ class CustomError {
 }
 
 export default CustomError;
-
-require("util").inherits(module.exports, Error);

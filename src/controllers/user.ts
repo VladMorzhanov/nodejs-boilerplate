@@ -5,11 +5,7 @@ import CustomError from "../error/custom-error";
 import User from "../models/User";
 
 export default {
-  retrieve: async (
-    { user }: { user: typeof User },
-    res: Response,
-    next: Function
-  ) => {
+  retrieve: async ({ user }: { user: any }, res: Response, next: Function) => {
     try {
       user = await UserService.getUser(user.id);
     } catch (e) {
@@ -28,7 +24,7 @@ export default {
   },
 
   update: async (
-    { user, body }: { user: typeof User; body: any },
+    { user, body }: { user: any; body: any },
     res: Response,
     next: Function
   ) => {
@@ -55,11 +51,7 @@ export default {
     res.status(STATUS_CODES.SUCCESS).json(user);
   },
 
-  delete: async (
-    { user }: { user: typeof User },
-    res: Response,
-    next: Function
-  ) => {
+  delete: async ({ user }: { user: any }, res: Response, next: Function) => {
     try {
       await UserService.deleteUser(user.id);
     } catch (e) {

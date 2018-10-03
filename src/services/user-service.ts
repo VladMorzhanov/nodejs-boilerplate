@@ -80,7 +80,7 @@ const createNewToken = async (user: any) => {
   return user;
 };
 
-module.exports = {
+export default {
   getUser,
   editUser,
   deleteUser

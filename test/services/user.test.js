@@ -6,7 +6,7 @@ const should = require("should");
 const WipeDB = require("../wipeTestDB");
 const { SECRET, NODE_ENV } = require("../../src/constants");
 
-describe("UserService Tests", function() {
+describe("UserService Tests", () => {
   this.timeout(20000);
 
   let user;

@@ -6,7 +6,7 @@ const should = require("should");
 const WipeDB = require("../wipeTestDB");
 const { API_URI, SECRET, NODE_ENV } = require("../../src/constants");
 
-describe("User controller", function() {
+describe("User controller", () => {
   this.timeout(20000);
 
   let user;
@@ -95,14 +95,14 @@ describe("User controller", function() {
     });
   });
 
-  describe("DELETE /user", function() {
-    it("should return 401 if token not provided", function(done) {
+  describe("DELETE /user", () => {
+    it("should return 401 if token not provided", done => {
       request(app)
         .delete(API_URI + "/user")
         .expect(401, done);
     });
 
-    it("should return 200 if user deleted", function(done) {
+    it("should return 200 if user deleted", done => {
       request(app)
         .delete(API_URI + "/user")
         .set("x-token", user.token)

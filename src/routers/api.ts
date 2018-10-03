@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const Generic = require("../controllers/generic");
+import Generic from "../controllers/generic";
 import User from "../controllers/user";
-const JwtCheck = require("../middleware/jwt-check");
-const ErrorHandler = require("../middleware/error-handler");
-const NotFound = require("../middleware/not-found");
+import JwtCheck from "../middleware/jwt-check";
+import ErrorHandler from "../middleware/error-handler";
+import NotFound from "../middleware/not-found";
 
 const router = new Router();
 
@@ -16,7 +16,7 @@ router
   .get("/user", JwtCheck, User.retrieve)
   .put("/user", JwtCheck, User.update)
   .delete("/user", JwtCheck, User.delete)
-  .use(ErrorHandler())
-  .use(NotFound("Not Found"));
+  .use(NotFound("Not Found"))
+  .use(ErrorHandler());
 
 export default router;
