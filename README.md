@@ -19,7 +19,6 @@ Alternatively you can run: "npm run http" on step 4 to run HTTP server.
 This boilerplate contains such folders:
 
 * <b>/src </b> - main sources folder.
-* <b>/src/bin </b> - contain main scripts that configures and run servers.
 * <b>/src/constants </b> - app constants.
 * <b>/src/controllers </b> - contain controllers that receives requests from routes, executes business logic via services and returns responses to client. 
 * <b>/src/db </b> - contain scripts to setup and manage database
@@ -28,6 +27,7 @@ This boilerplate contains such folders:
 * <b>/src/models </b> - database models (schemas)
 * <b>/src/routes </b> - configure here youre app's routes
 * <b>/src/services </b> - services contains logic to manage database, execute requests to other servers, change application behabior, and etc.
+* <b>/src/index.ts </b> - contain main scripts that configures and run server
 
 * <b>/test </b> - contains tests for controllers, services and other parts of application.
 
@@ -43,6 +43,7 @@ This boilerplate contains such folders:
 
 - <a href="https://nodejs.org/en/">NodeJS</a>
 - <a href="https://expressjs.com/">ExpressJS</a>
+- <a href="https://www.typescriptlang.org/">Typescript</a>
 - <a href="https://jwt.io/">JWT</a>
 - <a href="https://github.com/helmetjs/helmet">Helmet</a>
 - <a href="https://github.com/request/request">Request</a>
