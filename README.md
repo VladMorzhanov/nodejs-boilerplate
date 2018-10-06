@@ -1,4 +1,4 @@
-# NodeJS ExpressJS Boilerplate (with MongoDB)
+# NodeJS ExpressJS Boilerplate
 
 <img src="https://i.imgur.com/KbO2Soz.jpg"/>
 
