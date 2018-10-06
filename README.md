@@ -8,7 +8,7 @@ Node.js Boilerplate is an project that allows you to start new node.js project f
 
 Use these steps to install project
 1. npm i
-2. Create MongoDB databse (optional)
+2. Create MongoDB databse
 3. Add MONGODB_URL and MONGODB_TEST_URL to environment variable (optional)
 4. npm start
 
@@ -33,11 +33,9 @@ This boilerplate contains such folders:
 
 ## NPM Scripts
 
-* start - run node.js server (HTTPS)
-* http - run node.js server (HTTP)
+* start - run node.js server
 * test - test server with Mocha
 * lint - run eslint check
-* forever - add /src/bin/www.js script to forever scripts and run
 
 ## Main Technologies and libraries
 
