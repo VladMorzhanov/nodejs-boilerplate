@@ -1,21 +1,26 @@
 {
-  "name": "api",
-  "version": "1.2.1",
-  "description": "NodeJS Boilerplate repository",
-  "main": "./src/bin/www.js",
+  "name": "nodejs-express-boilerplate",
+  "version": "1.2.2",
+  "description": "NodeJS Express boilerplate app",
+  "main": "./src/index.js",
   "author": "Vlad Morzhanov",
   "license": "ISC",
-  "scripts": {
-    "start": "nodemon",
-    "serve": "node ./dist",
-    "build": "tsc"
-  },
   "keywords": [
     "node",
     "node.js",
     "express.js",
     "boilerplate"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morzhanov/nodejs-express-boilerplate"
+  },
+  "homepage": "https://github.com/morzhanov/nodejs-express-boilerplate"
+  "scripts": {
+    "start": "nodemon",
+    "serve": "node ./dist",
+    "build": "tsc"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
@@ -55,10 +60,5 @@
     "supertest": "^2.0.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VladMorzhanov/nodejs-boilerplate.git"
-  },
-  "homepage": "https://github.com/VladMorzhanov/nodejs-boilerplate#readme"
+  }
 }
